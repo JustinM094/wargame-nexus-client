@@ -10,6 +10,8 @@ import { GamesAndEvents } from "./GamesandEvents";
 import { GameDetails } from "./GameDetails";
 import { Army } from "./Army";
 import { ArmyDetails } from "./ArmyDetails";
+import { UserProfile } from "./UserProfile";
+import { CreateArmy } from "./CreateArmy";
 
 export const ApplicationViews = () => {
   return (
@@ -26,6 +28,8 @@ export const ApplicationViews = () => {
           <Route path="/games/:id" element={<GameDetails />} />
           <Route path="armies" element={<Army />} />
           <Route path="armies/:id" element={<ArmyDetails />} />
+          <Route path="create-army" element={<CreateArmy />} />
+          <Route path="profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
