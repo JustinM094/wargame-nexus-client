@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export const Login = () => {
-  const [email, setEmail] = useState("me@me.com");
-  const [password, setPassword] = useState("me");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const existDialog = useRef();
   const navigate = useNavigate();
 

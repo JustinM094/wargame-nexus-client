@@ -3,13 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export const Register = () => {
-  const [email, setEmail] = useState("admina@straytor.com");
-  const [password, setPassword] = useState("straytor");
-  const [firstName, setFirstName] = useState("Admina");
-  const [lastName, setLastName] = useState("Straytor");
-  const [bio, setBio] = useState("Bio");
-  const [profile_image_url, setProfileImg] = useState("Image URL");
-  const [rare_username, setRareUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [bio, setBio] = useState("");
+  const [profile_image_url, setProfileImg] = useState("");
+  const [wargame_username, setWargameUsername] = useState("");
   const existDialog = useRef();
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export const Register = () => {
         last_name: lastName,
         bio,
         profile_image_url,
-        rare_username,
+        wargame_username,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export const Register = () => {
               value={firstName}
               onChange={(evt) => setFirstName(evt.target.value)}
               className="form-control"
-              placeholder=""
+              placeholder="first name"
               required
               autoFocus
             />
@@ -78,7 +78,7 @@ export const Register = () => {
               value={lastName}
               onChange={(evt) => setLastName(evt.target.value)}
               className="form-control"
-              placeholder=""
+              placeholder="last name"
               required
               autoFocus
             />
@@ -134,8 +134,8 @@ export const Register = () => {
             <input
               type="text"
               id="inputUsername"
-              value={rare_username}
-              onChange={(evt) => setRareUsername(evt.target.value)}
+              value={wargame_username}
+              onChange={(evt) => setWargameUsername(evt.target.value)}
               className="form-control"
               placeholder="username"
             />
