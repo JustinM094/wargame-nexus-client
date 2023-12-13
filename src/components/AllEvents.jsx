@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { eventService } from "../services/eventService";
 import { Link } from "react-router-dom";
 
-export const HomePage = () => {
+export const AllEvents = () => {
   const [everyEvent, setEveryEvent] = useState([]);
   //   const navigate = useNavigate();
 
@@ -17,16 +17,8 @@ export const HomePage = () => {
   return (
     <>
       <section className="welcome-page">
-        <div className="welcome-background bg-black text-white py-16">
-          <h1 className="text-4xl font-bold mb-4">
-            <span>Welcome to</span>
-          </h1>
-          <h1 className="text-5xl font-bold">
-            <span>Wargame Nexus</span>
-          </h1>
-        </div>
         <div className="recent-recipes">
-          <h2>Upcoming Events</h2>
+          <h1>All Upcoming events</h1>
         </div>
         <div>
           <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
