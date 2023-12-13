@@ -1,72 +1,58 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "./Navbar.css";
 
 export const NavBar = () => {
   const navigate = useNavigate();
+
   return (
-    <ul className="navbar pt-2 pb-6">
-      <li className="navbar__item pl-10">
-        <NavLink className="btn-navbar" to={"/posts"}>
-          All Posts
-        </NavLink>
-      </li>
-      <li className="navbar__item">
-        <NavLink className="btn-navbar" to={"/myposts"}>
-          My Posts
-        </NavLink>
-      </li>
-      <li className="navbar__item">
-        <NavLink className="btn-navbar" to={"/createpost"}>
-          Create Post
-        </NavLink>
-      </li>
-      <li className="navbar__item">
-        <NavLink className="btn-navbar" to={"/categorymanager"}>
-          Category Manager
-        </NavLink>
-      </li>
-      <li className="navbar__item">
-        <NavLink className="btn-navbar" to={"/tagmanager"}>
-          Tag Manager
-        </NavLink>
-      </li>
-      <li className="navbar__item">
-        <NavLink className="btn-navbar" to={"/users"}>
-          User Profiles
-        </NavLink>
-      </li>
-      {localStorage.getItem("rare_token") !== null ? (
-        <li className="navbar__item -translate-y-2">
-          <button
-            className="btn-delete"
-            onClick={() => {
-              localStorage.removeItem("rare_token");
-              navigate("/login");
-            }}
+    <nav className="bg-gray-800 p-4">
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <NavLink
+            to={"/"}
+            className="text-white font-bold text-xl hover:text-gray-300"
           >
-            Logout
-          </button>
-        </li>
-      ) : (
-        <>
-          <li className="navbar__item">
-            <NavLink
-              className="text-left underline text-blue-600 hover:text-purple-700"
-              to={"/login"}
+            WGN
+          </NavLink>
+          <NavLink to={"/allevents"} className="text-white hover:text-gray-300">
+            Events
+          </NavLink>
+          <NavLink
+            to={"/gamesevents"}
+            className="text-white hover:text-gray-300"
+          >
+            Your Games and Events
+          </NavLink>
+          <NavLink to={"/armies"} className="text-white hover:text-gray-300">
+            Your Armies
+          </NavLink>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          {localStorage.getItem("rare_token") !== null ? (
+            <button
+              className="text-white hover:text-gray-300"
+              onClick={() => {
+                localStorage.removeItem("rare_token");
+                navigate("/login");
+              }}
             >
-              Login
-            </NavLink>
-          </li>
-          <li className="navbar__item">
-            <NavLink
-              className="text-left underline text-blue-600 hover:text-purple-700"
-              to={"/register"}
-            >
-              Register
-            </NavLink>
-          </li>
-        </>
-      )}{" "}
-    </ul>
+              Logout
+            </button>
+          ) : (
+            <>
+              <NavLink to={"/login"} className="text-white hover:text-gray-300">
+                Login
+              </NavLink>
+              <NavLink
+                to={"/register"}
+                className="text-white hover:text-gray-300"
+              >
+                Register
+              </NavLink>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
   );
 };

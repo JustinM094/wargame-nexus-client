@@ -8,6 +8,8 @@ import { AllEvents } from "./AllEvents";
 import { CreateGame } from "./CreateGame";
 import { GamesAndEvents } from "./GamesandEvents";
 import { GameDetails } from "./GameDetails";
+import { Army } from "./Army";
+import { ArmyDetails } from "./ArmyDetails";
 
 export const ApplicationViews = () => {
   return (
@@ -15,13 +17,16 @@ export const ApplicationViews = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route element={<Authorized />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/allevents" element={<AllEvents />} />
-        <Route path="/events/:id" element={<EventDetails />} />
-        <Route path="creategame" element={<CreateGame />} />
-        <Route path="gamesevents" element={<GamesAndEvents />} />
-        <Route path="/games/:id" element={<GameDetails />} />
+        <Route element={<Authorized />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/allevents" element={<AllEvents />} />
+          <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="creategame" element={<CreateGame />} />
+          <Route path="gamesevents" element={<GamesAndEvents />} />
+          <Route path="/games/:id" element={<GameDetails />} />
+          <Route path="armies" element={<Army />} />
+          <Route path="armies/:id" element={<ArmyDetails />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

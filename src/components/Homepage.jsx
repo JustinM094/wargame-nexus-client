@@ -1,4 +1,4 @@
-import "./Homepage.css";
+// import "./Homepage.css";
 import { useState, useEffect } from "react";
 import { eventService } from "../services/eventService";
 import { Link } from "react-router-dom";
