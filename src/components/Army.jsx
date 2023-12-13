@@ -14,7 +14,7 @@ export const Army = () => {
   }, []);
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="flex flex-col items-center justify-between h-screen">
       <h1 className="text-3xl font-bold mb-4">Your Armies</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {userArmies.map((army) => (
@@ -42,6 +42,13 @@ export const Army = () => {
           </Link>
         ))}
       </div>
+
+      <Link
+        to="/create-army"
+        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
+      >
+        Create New
+      </Link>
     </div>
   );
 };
