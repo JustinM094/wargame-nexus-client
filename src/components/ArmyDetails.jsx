@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { armyServiceById } from "../services/armyService";
 
 export const ArmyDetails = () => {
@@ -37,6 +37,12 @@ export const ArmyDetails = () => {
           {/* Add more details based on your event model */}
         </section>
       </article>
+      <Link
+        to={`/edit-army/${armyDetails.id}`}
+        className="mt-2 block bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+      >
+        Edit
+      </Link>
     </div>
   );
 };
