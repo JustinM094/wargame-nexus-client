@@ -7,10 +7,9 @@ export const CreateArmy = () => {
   const [armyData, setArmyData] = useState({
     name: "",
     image_url: "",
-    category_id: 0,
+    category: 0,
     points: 0,
     description: "",
-    // Add more fields as needed
   });
 
   useEffect(() => {
@@ -43,10 +42,6 @@ export const CreateArmy = () => {
       body: JSON.stringify({ ...armyData }),
     });
 
-    // Add your logic to send the gameData to the server for creation
-    // For example, you can use fetch or axios to make a POST request
-
-    // After successful creation, you can navigate to the game details page or any other page
     navigate("/armies");
   };
 
@@ -123,16 +118,16 @@ export const CreateArmy = () => {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="category_id"
+            htmlFor="category"
             className="block text-sm font-medium text-gray-600"
           >
             Category
           </label>
           <select
-            name="category_id"
+            name="category"
             onChange={handleInputChange}
             className="rounded p-2 text-sm"
-            value={armyData.category_id}
+            value={armyData.category}
           >
             <option value={0}>Select Category</option>
             {category.map((catobj) => {
@@ -144,7 +139,6 @@ export const CreateArmy = () => {
             })}
           </select>
         </div>
-        {/* Add more input fields for other Game model properties */}
         <button
           type="submit"
           className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
