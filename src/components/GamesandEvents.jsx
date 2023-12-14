@@ -1,10 +1,12 @@
-// import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 export const GamesAndEvents = () => {
-  // You can fetch user's games and events here using useEffect
-
-  // Placeholder data
+  // const [selectedGameDetails, setSelectedGameDetails] = useState({
+  //     id: 1,
+  //     name: "Game 1",
+  //     // Other game details
+  //   });
   const userGames = [
     { id: 1, name: "Game 1" },
     { id: 2, name: "Game 2" },
@@ -19,44 +21,47 @@ export const GamesAndEvents = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   // Fetch user's games and events data
-  //   // Update userGames and userEvents state
-  // }, []);
-
   return (
-    <div className="flex justify-center mt-8">
-      <div className="w-full max-w-4xl flex">
-        {/* User's Games */}
-        <div className="flex-1 pr-4">
-          <h2 className="text-xl font-bold mb-4">Your Games</h2>
-          <ul>
-            {userGames.map((game) => (
-              <li
-                key={game.id}
-                className="border p-4 mb-2 cursor-pointer hover:bg-gray-100"
-                onClick={() => navigate(`/games/${game.id}`)}
+    <div className="flex h-screen">
+      <div className="w-2/3 bg-gray-100 p-8 overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4">Your Games</h2>
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {userGames.map((game) => (
+            <div
+              key={game.id}
+              className="border p-4 cursor-pointer hover:bg-gray-200"
+            >
+              <p className="text-lg font-semibold mb-2">{game.name}</p>
+              <Link
+                to={`/games/${game.id}`}
+                className="block text-blue-500 hover:underline"
               >
-                {game.name}
-              </li>
-            ))}
-          </ul>
+                View Details
+              </Link>
+              <Link
+                to="/create-event"
+                // state={{ gameDetails: selectedGameDetails }}
+                className="mt-2 block bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+              >
+                Host Game
+              </Link>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* User's Events */}
-        <div className="flex-1 pl-4">
-          <h2 className="text-xl font-bold mb-4">Events Attending</h2>
-          <ul>
-            {userEvents.map((event) => (
-              <li
-                key={event.id}
-                className="border p-4 mb-2 cursor-pointer hover:bg-gray-100"
-                onClick={() => navigate(`/events/${event.id}`)}
-              >
-                {event.name}
-              </li>
-            ))}
-          </ul>
+      <div className="w-1/3 bg-gray-200 p-8 overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-4">Events Attending</h2>
+        <div className="grid gap-4 grid-cols-1">
+          {userEvents.map((event) => (
+            <div
+              key={event.id}
+              className="border p-4 cursor-pointer hover:bg-gray-300"
+              onClick={() => navigate(`/events/${event.id}`)}
+            >
+              <p className="text-lg font-semibold">{event.name}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
