@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { eventServiceById } from "../services/eventService";
 
 export const EventDetails = () => {
@@ -45,6 +45,12 @@ export const EventDetails = () => {
             <p>{eventDetails.game?.max_players}</p>
           </div>
           {/* Add more details based on your event model */}
+          <Link
+            to={`/event-sign-up/${eventDetails.id}`}
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
+          >
+            Sign Up?
+          </Link>
         </section>
       </article>
     </div>
