@@ -43,7 +43,7 @@ export const SignUpForm = () => {
     });
 
     // After successful creation, navigate to the desired page
-    navigate("/gamesevents");
+    navigate(`/events/${id}`);
   };
 
   return (

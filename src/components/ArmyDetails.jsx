@@ -1,16 +1,42 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { armyServiceById } from "../services/armyService";
 
 export const ArmyDetails = () => {
   const [armyDetails, setArmyDetails] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     armyServiceById(id).then((eventObj) => {
       setArmyDetails(eventObj);
     });
   }, [id]);
+
+  const handleDelete = async () => {
+    const variable = JSON.parse(localStorage.getItem("rare_token"));
+    const token = variable.token;
+
+    try {
+      const response = await fetch(`http://localhost:8000/armies/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${token}`,
+          // Add other headers if needed
+        },
+      });
+
+      if (response.ok) {
+        // Redirect to a page after successful deletion, for example, the home page
+        navigate("/armies");
+      } else {
+        // Handle errors, display a message, etc.
+        console.error("Failed to delete game");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <div>
@@ -43,6 +69,12 @@ export const ArmyDetails = () => {
       >
         Edit
       </Link>
+      <button
+        onClick={handleDelete}
+        className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+      >
+        Delete Army
+      </button>
     </div>
   );
 };
