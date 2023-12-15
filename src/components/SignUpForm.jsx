@@ -1,17 +1,25 @@
-import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { eventService } from "../services/eventService";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { armyService } from "../services/armyService";
 
 export const SignUpForm = () => {
+  const [userArmies, setUserArmies] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   // State to manage form input
   const [formData, setFormData] = useState({
     event: id,
-    army: "",
+    army: 0,
   });
 
-  // Function to handle form input changes
+  useEffect(() => {
+    armyService().then((obj) => {
+      const filteredArmies = obj.filter((army) => army.is_owner === true);
+      setUserArmies(filteredArmies);
+    });
+  }, []);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -20,18 +28,22 @@ export const SignUpForm = () => {
     }));
   };
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Add your logic to submit the form data to the server
-      await eventService.createEventGamer(formData);
+    await fetch(`http://localhost:8000/eventgamers`, {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${
+          JSON.parse(localStorage.getItem("rare_token")).token
+        }`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...formData }),
+    });
 
-      // After successful submission, you can provide a link to the confirmation page
-    } catch (error) {
-      console.error("Error submitting the form:", error);
-    }
+    // After successful creation, navigate to the desired page
+    navigate("/gamesevents");
   };
 
   return (
@@ -48,26 +60,23 @@ export const SignUpForm = () => {
           <select
             name="army"
             onChange={handleInputChange}
-            value={formData.army}
             className="rounded p-2 text-sm"
-            required
+            value={formData.army.id}
           >
-            {/* Add options based on user's available armies or preferences */}
-            <option value="">Select Army</option>
-            <option value="1">Army 1</option>
-            <option value="2">Army 2</option>
-            {/* Add more options as needed */}
+            <option value={0}>Select Army</option>
+            {userArmies.map((armobj) => (
+              <option key={armobj.id} value={armobj.id}>
+                {armobj.name}
+              </option>
+            ))}
           </select>
         </div>
-        {/* Wrap your button with Link */}
-        <Link to={`/registration-confirmation/${id}`}>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-          >
-            Submit
-          </button>
-        </Link>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
