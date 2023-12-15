@@ -25,12 +25,10 @@ export const NavBar = () => {
           <NavLink to={"/armies"} className="text-white hover:text-gray-300">
             Your Armies
           </NavLink>
-          <NavLink
-            to={"profile/:userId"}
-            className="text-white hover:text-gray-300"
-          >
+          <NavLink to="/profile" className="text-white hover:text-gray-300">
             Your Profile
           </NavLink>
+          ;
         </div>
 
         <div className="flex items-center space-x-4">

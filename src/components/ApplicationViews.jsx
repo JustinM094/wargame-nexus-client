@@ -37,7 +37,7 @@ export const ApplicationViews = () => {
           <Route path="armies/:id" element={<ArmyDetails />} />
           <Route path="create-army" element={<CreateArmy />} />
           <Route path="edit-army/:id" element={<EditArmy />} />
-          <Route path="/profile/:id" element={<UserProfile />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
