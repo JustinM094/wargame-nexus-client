@@ -1,37 +1,24 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { systemService } from "../services/systemService";
+import { useNavigate, useParams } from "react-router-dom";
+import { gameServiceById } from "../services/gameService";
 
 export const CreateEvent = () => {
-  const [system, setSystem] = useState([]);
+  const { id } = useParams();
+  const [gameDetails, setGameDetails] = useState({});
   const [eventData, setEventData] = useState({
     event_name: "",
     event_location: "",
     event_time: "",
-    points: 0,
-    max_players: 0,
-    system_id: 0,
+    game_id: id,
     // Add more fields as needed
   });
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    systemService().then((sysArray) => {
-      setSystem(sysArray);
+    gameServiceById(id).then((gameObj) => {
+      setGameDetails(gameObj);
     });
-
-    // Check if game details are present in the location state
-    const gameDetails = location.state?.gameDetails;
-    if (gameDetails) {
-      // Pre-fill the form fields with game details
-      setEventData((prevData) => ({
-        ...prevData,
-        event_name: gameDetails.name,
-        // Add more fields as needed
-      }));
-    }
-  }, [location.state]);
+  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +31,7 @@ export const CreateEvent = () => {
   const handleCreateEvent = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:8000/games`, {
+    await fetch(`http://localhost:8000/events`, {
       method: "POST",
       headers: {
         Authorization: `Token ${
@@ -55,9 +42,6 @@ export const CreateEvent = () => {
       body: JSON.stringify({ ...eventData }),
     });
 
-    // Add your logic to send the eventData to the server for creation
-    // For example, you can use fetch or axios to make a POST request
-
     // After successful creation, you can navigate to the game details page or any other page
     navigate("/gamesevents");
   };
@@ -66,12 +50,13 @@ export const CreateEvent = () => {
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
       <h1 className="text-2xl font-bold mb-4">Create Event</h1>
       <form onSubmit={handleCreateEvent}>
+        <div className="mb-4"></div>
         <div className="mb-4">
           <label
-            htmlFor="title"
+            htmlFor="event_name"
             className="block text-sm font-medium text-gray-600"
           >
-            Name
+            Event Name
           </label>
           <input
             type="text"
@@ -84,33 +69,40 @@ export const CreateEvent = () => {
           />
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            value={eventData.description}
-            onChange={handleInputChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          ></textarea>
+          <img
+            className="w-full h-40 object-cover"
+            src={gameDetails.image_url}
+            alt={gameDetails.game_name}
+          />
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-bold">Description:</h3>
+          <p>{gameDetails.description}</p>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-bold">Points:</h3>
+          <p>{gameDetails.points}</p>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-bold">Max Players:</h3>
+          <p>{gameDetails.max_players}</p>
+        </div>
+        <div className="mb-4">
+          <h3 className="text-xl font-bold">System:</h3>
+          <p>{gameDetails.system?.name}</p>
         </div>
         <div className="mb-4">
           <label
-            htmlFor="image_url"
+            htmlFor="event_location"
             className="block text-sm font-medium text-gray-600"
           >
-            Image URL
+            Event Location
           </label>
           <input
             type="text"
-            id="image_url"
-            name="image_url"
-            value={eventData.image_url}
+            id="event_location"
+            name="event_location"
+            value={eventData.event_location}
             onChange={handleInputChange}
             className="mt-1 p-2 w-full border rounded-md"
             required
@@ -118,62 +110,21 @@ export const CreateEvent = () => {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="points"
+            htmlFor="event_time"
             className="block text-sm font-medium text-gray-600"
           >
-            Points
+            Event time
           </label>
           <input
-            type="number"
-            id="points"
-            name="points"
-            value={eventData.points}
+            type="text"
+            id="event_time"
+            name="event_time"
+            value={eventData.event_time}
             onChange={handleInputChange}
             className="mt-1 p-2 w-full border rounded-md"
             required
           />
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="max_players"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Max Players
-          </label>
-          <input
-            type="number"
-            id="max_players"
-            name="max_players"
-            value={eventData.max_players}
-            onChange={handleInputChange}
-            className="mt-1 p-2 w-full border rounded-md"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="system_id"
-            className="block text-sm font-medium text-gray-600"
-          >
-            System
-          </label>
-          <select
-            name="system_id"
-            onChange={handleInputChange}
-            className="rounded p-2 text-sm"
-            value={eventData.system_id}
-          >
-            <option value={0}>Select System</option>
-            {system.map((sysobj) => {
-              return (
-                <option key={sysobj.id} value={sysobj.id}>
-                  {sysobj.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        {/* Add more input fields for other Game model properties */}
         <button
           type="submit"
           className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
