@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { gameServiceById } from "../services/gameService";
 
 export const GameDetails = () => {
@@ -41,6 +41,12 @@ export const GameDetails = () => {
             <p>{gameDetails.max_players}</p>
           </div>
           {/* Add more details based on your event model */}
+          <Link
+            to="/create-event"
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
+          >
+            Host Game?
+          </Link>
         </section>
       </article>
     </div>

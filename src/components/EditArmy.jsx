@@ -4,7 +4,7 @@ import { armyServiceById } from "../services/armyService";
 import { categoryService } from "../services/categoryService";
 
 export const EditArmy = () => {
-  const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export const EditArmy = () => {
 
   useEffect(() => {
     categoryService().then((catArray) => {
-      setCategory(catArray);
+      setCategories(catArray);
     });
   }, []);
 
@@ -151,7 +151,7 @@ export const EditArmy = () => {
             value={armyDetails.category.id}
           >
             <option value={0}>{armyDetails.category.name}</option>
-            {category.map((catobj) => {
+            {categories.map((catobj) => {
               return (
                 <option key={catobj.id} value={catobj.id}>
                   {catobj.name}
