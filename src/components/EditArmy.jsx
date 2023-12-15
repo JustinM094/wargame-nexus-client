@@ -17,9 +17,12 @@ export const EditArmy = () => {
   });
 
   useEffect(() => {
-    // Fetch the initial army details when the component mounts
     armyServiceById(id).then((data) => {
-      setArmyDetails(data);
+      const initialCategoryId = data.category ? data.category.id : 0;
+      setArmyDetails({
+        ...data,
+        category: initialCategoryId,
+      });
     });
   }, [id]);
 
