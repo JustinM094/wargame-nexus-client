@@ -2,32 +2,56 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { eventServiceById } from "../services/eventService";
 import { eventGamersService } from "../services/eventService";
+import { userServiceById } from "../services/userService";
 
 export const EventDetails = () => {
   const [eventDetails, setEventDetails] = useState({});
   const [eventGamers, setEventGamers] = useState([]);
+  const [currentGamer, setCurrentGamer] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
+  const variable = JSON.parse(localStorage.getItem("rare_token"));
+  const currentUserId = variable.user_id;
 
   useEffect(() => {
-    eventServiceById(id).then((eventObj) => {
-      setEventDetails(eventObj);
-    });
-    eventGamersService(id).then((gamers) => {
-      setEventGamers(gamers);
-    });
-  }, [id]);
+    const fetchData = async () => {
+      try {
+        const [eventObj, gamers, user] = await Promise.all([
+          eventServiceById(id),
+          eventGamersService(id),
+          userServiceById(currentUserId),
+        ]);
+
+        setEventDetails(eventObj);
+        setEventGamers(gamers);
+        setCurrentGamer(user);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id, currentUserId]);
 
   const handleLeaveEvent = async () => {
-    const variable = JSON.parse(localStorage.getItem("rare_token"));
     const token = variable.token;
-    const currentUserId = variable.user_id;
 
     try {
-      // Fetch the event gamer relationship for the current user
-      const response = await fetch(
-        `http://localhost:8000/eventgamers/${currentUserId}`,
+      // Find the event gamer relationship for the current user
+      const foundGamerEvent = currentGamer.gamer_events.find(
+        (gamerEvent) => gamerEvent.event.id === eventDetails.id
+      );
+
+      if (!foundGamerEvent) {
+        console.warn("Current user is not signed up for this event.");
+        return;
+      }
+
+      // Make a DELETE request to delete the event gamer relationship
+      const deleteResponse = await fetch(
+        `http://localhost:8000/eventgamers/${foundGamerEvent.id}`,
         {
+          method: "DELETE",
           headers: {
             Authorization: `Token ${token}`,
             // Add other headers if needed
@@ -35,38 +59,21 @@ export const EventDetails = () => {
         }
       );
 
-      if (response.ok) {
-        const eventGamers = await response.json();
+      if (deleteResponse.ok) {
+        // Fetch the updated data after successful deletion
+        const [eventObj, gamers] = await Promise.all([
+          eventServiceById(id),
+          eventGamersService(id),
+        ]);
 
-        if (eventGamers.length > 0) {
-          // Assuming you want to delete the first event gamer relationship found
-          const eventGamerIdToDelete = eventGamers[0].id;
+        setEventDetails(eventObj);
+        setEventGamers(gamers);
 
-          // Now, make a DELETE request to delete the event gamer relationship
-          const deleteResponse = await fetch(
-            `http://localhost:8000/eventgamers/${eventGamerIdToDelete}`,
-            {
-              method: "DELETE",
-              headers: {
-                Authorization: `Token ${token}`,
-                // Add other headers if needed
-              },
-            }
-          );
-
-          if (deleteResponse.ok) {
-            // Redirect to a page after successful deletion, for example, the home page
-            navigate(`/events/${id}`);
-          } else {
-            // Handle errors during deletion
-            console.error("Failed to delete game");
-          }
-        } else {
-          console.warn("Current user is not signed up for this event.");
-        }
+        // Redirect to a page after successful deletion
+        navigate(`/events/${id}`);
       } else {
-        // Handle errors during fetching event gamers
-        console.error("Failed to fetch event gamers");
+        // Handle errors during deletion
+        console.error("Failed to delete event gamer");
       }
     } catch (error) {
       console.error("Error:", error);
