@@ -61,20 +61,20 @@ export const ArmyDetails = () => {
             <p>{armyDetails.category?.name}</p>
           </div>
           {/* Add more details based on your event model */}
+          <Link
+            to={`/edit-army/${armyDetails.id}`}
+            className="mt-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          >
+            Edit
+          </Link>
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+          >
+            Delete Army
+          </button>
         </section>
       </article>
-      <Link
-        to={`/edit-army/${armyDetails.id}`}
-        className="mt-2 block bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-      >
-        Edit
-      </Link>
-      <button
-        onClick={handleDelete}
-        className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
-      >
-        Delete Army
-      </button>
     </div>
   );
 };

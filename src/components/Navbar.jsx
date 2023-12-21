@@ -1,7 +1,8 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { getCurrentUserId } from "../../authutils";
 
 export const NavBar = () => {
-  const navigate = useNavigate();
+  const user_id = getCurrentUserId();
 
   return (
     <nav className="bg-gray-800 p-4">
@@ -25,10 +26,12 @@ export const NavBar = () => {
           <NavLink to={"/armies"} className="text-white hover:text-gray-300">
             Your Armies
           </NavLink>
-          <NavLink to="/profile" className="text-white hover:text-gray-300">
+          <NavLink
+            to={`/profile/${user_id}`}
+            className="text-white hover:text-gray-300"
+          >
             Your Profile
           </NavLink>
-          ;
         </div>
 
         <div className="flex items-center space-x-4">
@@ -37,7 +40,7 @@ export const NavBar = () => {
               className="text-white hover:text-gray-300"
               onClick={() => {
                 localStorage.removeItem("rare_token");
-                navigate("/login");
+                // You might want to redirect to the login page or do other actions here
               }}
             >
               Logout
