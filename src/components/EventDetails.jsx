@@ -12,6 +12,7 @@ export const EventDetails = () => {
   const navigate = useNavigate();
   const variable = JSON.parse(localStorage.getItem("rare_token"));
   const currentUserId = variable.user_id;
+  const isHost = currentGamer.id === eventDetails.host;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -125,8 +126,16 @@ export const EventDetails = () => {
             to={`/event-sign-up/${eventDetails.id}`}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
           >
-            Sign Up?
+            Sign Up
           </Link>
+          {isHost && (
+            <Link
+              to={`/edit-event/${id}`}
+              className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 mb-4"
+            >
+              Edit Event
+            </Link>
+          )}
           <button
             onClick={handleLeaveEvent}
             className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"

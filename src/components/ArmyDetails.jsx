@@ -31,7 +31,7 @@ export const ArmyDetails = () => {
         navigate("/armies");
       } else {
         // Handle errors, display a message, etc.
-        console.error("Failed to delete game");
+        console.error("Failed to delete army");
       }
     } catch (error) {
       console.error("Error:", error);
