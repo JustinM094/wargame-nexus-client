@@ -10,7 +10,6 @@ export const AllEvents = () => {
   useEffect(() => {
     eventService().then((eventArray) => {
       setEveryEvent(eventArray);
-      console.log("events set");
     });
   }, []);
 

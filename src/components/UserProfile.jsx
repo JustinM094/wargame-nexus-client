@@ -27,6 +27,7 @@ export const UserProfile = () => {
       <img
         className="w-full h-40 object-cover"
         src={userData.profile_image_url}
+        alt="User Profile"
       />
       <p>
         Name: {userData.user?.first_name} {userData.user?.last_name}
