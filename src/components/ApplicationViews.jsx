@@ -17,6 +17,7 @@ import { CreateEvent } from "./CreateEvent";
 import { EditGame } from "./EditGame";
 import { SignUpForm } from "./SignUpForm";
 import { EditEvent } from "./EditEvent";
+import { EditProfile } from "./EditProfile";
 
 export const ApplicationViews = () => {
   return (
@@ -40,6 +41,7 @@ export const ApplicationViews = () => {
           <Route path="create-army" element={<CreateArmy />} />
           <Route path="edit-army/:id" element={<EditArmy />} />
           <Route path="/profile/:id" element={<UserProfile />} />
+          <Route path="/edit-profile/:id" element={<EditProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
