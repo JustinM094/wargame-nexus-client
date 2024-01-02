@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getCurrentUserId } from "../../authutils";
 
 export const NavBar = () => {
   const user_id = getCurrentUserId();
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-gray-800 p-4">
@@ -40,6 +41,7 @@ export const NavBar = () => {
               className="text-white hover:text-gray-300"
               onClick={() => {
                 localStorage.removeItem("rare_token");
+                navigate("/login");
                 // You might want to redirect to the login page or do other actions here
               }}
             >
