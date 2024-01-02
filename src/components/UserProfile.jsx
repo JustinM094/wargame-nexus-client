@@ -53,7 +53,6 @@ export const UserProfile = () => {
         >
           Edit
         </Link>
-        {/* Add more details as needed */}
       </div>
     </div>
   );
