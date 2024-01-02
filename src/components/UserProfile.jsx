@@ -23,9 +23,9 @@ export const UserProfile = () => {
 
   return (
     <div className="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-md">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center space-x-6">
         <img
-          className="w-32 h-32 object-cover rounded-full mr-6"
+          className="w-32 h-32 object-cover rounded-full"
           src={userData.profile_image_url}
           alt="User Profile"
         />
@@ -40,15 +40,16 @@ export const UserProfile = () => {
       </div>
       <hr className="my-6 border-t border-gray-300" />
       <div className="text-lg">
-        <p>
-          <span className="font-bold">Email:</span> {userData.user?.email}
+        <p className="mb-2">
+          <span className="font--- text-gray-700">Email:</span>{" "}
+          {userData.user?.email}
         </p>
-        <p className="mt-2">
-          <span className="font-bold">Bio:</span> {userData.bio}
+        <p className="mb-4">
+          <span className="font--- text-gray-700">Bio:</span> {userData.bio}
         </p>
         <Link
           to={`/edit-profile/${userData.id}`}
-          className="mt-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
         >
           Edit
         </Link>

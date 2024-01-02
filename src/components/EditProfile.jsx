@@ -30,14 +30,14 @@ export const EditProfile = () => {
     e.preventDefault();
 
     try {
-      // Call your service to update the user profile
+      // Include user and gamer_events in the request with placeholder values
       const finalValues = {
-        wargame_username: userData.wargame_username,
-        bio: userData.bio,
-        // Add more fields as needed
+        ...userData,
+        user: {},
+        gamer_events: [],
       };
 
-      // Replace the following URL with your actual update profile endpoint
+      // Call your service to update the user profile
       await fetch(`http://localhost:8000/users/${id}`, {
         method: "PUT",
         headers: {
@@ -50,7 +50,7 @@ export const EditProfile = () => {
       });
 
       // Redirect to the user profile page after successful update
-      navigate(`/user-profile/${id}`);
+      navigate(`/profile/${id}`);
     } catch (error) {
       console.error("Error updating user profile:", error);
       // Handle error appropriately, e.g., show an error message to the user
@@ -61,55 +61,99 @@ export const EditProfile = () => {
     return <div className="text-center mt-8">Loading...</div>;
   }
 
+  const handleDelete = async () => {
+    const variable = JSON.parse(localStorage.getItem("rare_token"));
+    const token = variable.token;
+
+    try {
+      const response = await fetch(`http://localhost:8000/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${token}`,
+          // Add other headers if needed
+        },
+      });
+
+      if (response.ok) {
+        // Redirect to a page after successful deletion, for example, the home page
+        navigate("/login");
+      } else {
+        // Handle errors, display a message, etc.
+        console.error("Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-md">
+      <div>
+        {/* Display current user information */}
+        <h2 className="text-xl font-bold mb-4">Current Information</h2>
+        <img
+          className="w-32 h-32 object-cover rounded-full"
+          src={userData.profile_image_url}
+          alt="User Profile"
+        />
+        <div>
+          <p className="font-bold">Wargame Username:</p>
+          {userData.wargame_username}
+        </div>
+        <div className="mt-2">
+          <p className="font-bold">Bio:</p> {userData.bio}
+        </div>
+        {/* Display more current information as needed */}
+      </div>
       <h1 className="text-3xl font-bold mb-6">Edit Profile</h1>
       <form onSubmit={handleFormSubmit}>
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col space-y-4">
           {/* Add form fields for editing user profile */}
           {/* Use controlled components with state for each field */}
+
           {/* Example: */}
           <input
             type="text"
-            className="border rounded-md p-2 mr-4"
+            className="border rounded-md p-3"
+            placeholder="profile_image_url"
+            name="profile_image_url"
+            value={userData.profile_image_url}
+            onChange={handleInputChange}
+          />
+
+          <input
+            type="text"
+            className="border rounded-md p-3"
             placeholder="Wargame Username"
             name="wargame_username"
             value={userData.wargame_username}
             onChange={handleInputChange}
           />
-          <input
-            type="text"
-            className="border rounded-md p-2"
+          <textarea
+            className="border rounded-md p-3"
             placeholder="Bio"
             name="bio"
             value={userData.bio}
             onChange={handleInputChange}
           />
+          {/* Add more form fields as needed */}
         </div>
-        {/* Add more form fields as needed */}
 
         <hr className="my-6 border-t border-gray-300" />
-
-        <div>
-          {/* Display current user information */}
-          <h2 className="text-xl font-bold mb-4">Current Information</h2>
-          <p>
-            <span className="font-bold">Wargame Username:</span>{" "}
-            {userData.wargame_username}
-          </p>
-          <p className="mt-2">
-            <span className="font-bold">Bio:</span> {userData.bio}
-          </p>
-          {/* Display more current information as needed */}
-        </div>
 
         <div className="mt-6">
           {/* Button to update profile */}
           <button
             type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+            className="bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600"
           >
             Update Profile
+          </button>
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white p-3 rounded-md hover:bg-blue-600"
+          >
+            Delete
           </button>
         </div>
       </form>
