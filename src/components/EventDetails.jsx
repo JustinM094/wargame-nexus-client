@@ -81,6 +81,31 @@ export const EventDetails = () => {
     }
   };
 
+  const handleDelete = async () => {
+    const variable = JSON.parse(localStorage.getItem("rare_token"));
+    const token = variable.token;
+
+    try {
+      const response = await fetch(`http://localhost:8000/events/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${token}`,
+          // Add other headers if needed
+        },
+      });
+
+      if (response.ok) {
+        // Redirect to a page after successful deletion, for example, the home page
+        navigate("/gamesevents");
+      } else {
+        // Handle errors, display a message, etc.
+        console.error("Failed to delete event");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div>
       <article className="bg-white rounded-lg overflow-hidden shadow-md mt-8 mx-auto max-w-2xl">
@@ -142,6 +167,14 @@ export const EventDetails = () => {
           >
             Leave Event
           </button>
+          {isHost && (
+            <button
+              onClick={handleDelete}
+              className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+            >
+              Delete Event
+            </button>
+          )}
         </section>
       </article>
     </div>
