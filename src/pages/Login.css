@@ -67,3 +67,14 @@ fieldset {
   min-width: 15rem;
   min-height: 5rem;
 }
+
+.login-logo-img {
+  width: auto;
+  height: 18em;
+  margin-bottom: 0.5em;
+  margin-left: 115px;
+}
+
+.text-xl {
+  margin-top: 0.5em;
+}

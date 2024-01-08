@@ -43,8 +43,17 @@ export const Login = () => {
 
       <section>
         <form className="form--login" onSubmit={handleLogin}>
-          <h1 className="text-4xl mt-7 mb-3">Wargame Nexus</h1>
+          <div>
+            <img
+              src="logo/WGN.png"
+              alt="Wargame Nexus Logo"
+              className="login-logo-img" // Adjust the width and height as needed
+            />
+          </div>
+          {/* <h1 className="text-4xl mt-7 mb-3">Wargame Nexus</h1> */}
           <h2 className="text-xl mb-10">Please sign in</h2>
+          {/* Add the video logo */}
+
           <fieldset className="mb-4">
             <label htmlFor="inputEmail"> Email </label>
             <input

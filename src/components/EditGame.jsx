@@ -14,7 +14,6 @@ export const EditGame = () => {
     points: 0,
     max_players: 0,
     system: 0,
-    // Add other properties as needed
   });
 
   useEffect(() => {
@@ -183,8 +182,6 @@ export const EditGame = () => {
             })}
           </select>
         </div>
-
-        {/* Add more input fields for other army properties */}
 
         <button
           type="submit"

@@ -7,7 +7,6 @@ export const SignUpForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // State to manage form input
   const [formData, setFormData] = useState({
     event: id,
     army: 0,
@@ -42,7 +41,6 @@ export const SignUpForm = () => {
       body: JSON.stringify({ ...formData }),
     });
 
-    // After successful creation, navigate to the desired page
     navigate(`/events/${id}`);
   };
 

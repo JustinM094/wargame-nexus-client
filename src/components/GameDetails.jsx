@@ -22,15 +22,12 @@ export const GameDetails = () => {
         method: "DELETE",
         headers: {
           Authorization: `Token ${token}`,
-          // Add other headers if needed
         },
       });
 
       if (response.ok) {
-        // Redirect to a page after successful deletion, for example, the home page
         navigate("/gamesevents");
       } else {
-        // Handle errors, display a message, etc.
         console.error("Failed to delete game");
       }
     } catch (error) {
@@ -66,7 +63,6 @@ export const GameDetails = () => {
             <h3 className="text-xl font-bold">Max Players:</h3>
             <p>{gameDetails.max_players}</p>
           </div>
-          {/* Add more details based on your event model */}
           <Link
             to={`/create-event/${id}`}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"

@@ -10,7 +10,6 @@ export const CreateEvent = () => {
     event_location: "",
     event_time: "",
     game_id: id,
-    // Add more fields as needed
   });
   const navigate = useNavigate();
 
@@ -42,7 +41,6 @@ export const CreateEvent = () => {
       body: JSON.stringify({ ...eventData }),
     });
 
-    // After successful creation, you can navigate to the game details page or any other page
     navigate("/gamesevents");
   };
 

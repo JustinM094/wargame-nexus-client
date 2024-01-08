@@ -6,14 +6,20 @@ export const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-black p-3">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <NavLink
             to={"/"}
             className="text-white font-bold text-xl hover:text-gray-300"
           >
-            WGN
+            <div className="navbar-logo">
+              <img
+                src="navbarLogo/Navbar Logo.png"
+                alt="DishHub Logo"
+                className="w-10 h-10"
+              />
+            </div>
           </NavLink>
           <NavLink to={"/allevents"} className="text-white hover:text-gray-300">
             Events
@@ -42,7 +48,6 @@ export const NavBar = () => {
               onClick={() => {
                 localStorage.removeItem("rare_token");
                 navigate("/login");
-                // You might want to redirect to the login page or do other actions here
               }}
             >
               Logout

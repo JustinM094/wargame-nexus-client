@@ -9,7 +9,6 @@ export const EditEvent = () => {
     event_name: "",
     event_location: "",
     event_time: "",
-    // Add other properties as needed
   });
 
   useEffect(() => {
@@ -36,8 +35,6 @@ export const EditEvent = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      //   const { game_id, ...otherDetails } = eventDetails;
-
       await fetch(`http://localhost:8000/events/${id}`, {
         method: "PUT",
         headers: {
@@ -118,8 +115,6 @@ export const EditEvent = () => {
             required
           />
         </div>
-
-        {/* Add more input fields for other event properties */}
 
         <button
           type="submit"
