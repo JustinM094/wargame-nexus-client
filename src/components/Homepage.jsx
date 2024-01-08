@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 export const HomePage = () => {
   const [everyEvent, setEveryEvent] = useState([]);
-  //   const navigate = useNavigate();
 
   useEffect(() => {
     eventService().then((eventArray) => {
@@ -16,18 +15,17 @@ export const HomePage = () => {
   return (
     <>
       <section className="welcome-page">
-        <div className="welcome-background bg-black text-white py-16">
-          <h1 className="text-4xl font-bold mb-4">
-            <span>Welcome to</span>
-          </h1>
-          <h1 className="text-5xl font-bold">
-            <span>Wargame Nexus</span>
-          </h1>
-        </div>
-        <div className="recent-recipes">
-          <h2>Upcoming Events</h2>
-        </div>
         <div>
+          <img
+            src="MainPageImg/Welcome to Wargame Nexus.png"
+            alt="Wargame Nexus Logo"
+            className="login-logo-img w-auto h-auto"
+          />
+        </div>
+        <div className="recent-recipes text-center mt-8">
+          <h2 className="text-3xl font-bold">Upcoming Events</h2>
+        </div>
+        <div className="container mx-auto mt-8">
           <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {everyEvent.map((event) => (
               <Link
@@ -50,7 +48,6 @@ export const HomePage = () => {
                     <h3 className="text-xl font-bold">Time:</h3>
                     <p>{event.event_time}</p>
                   </div>
-                  {/* Add more event details if needed */}
                 </div>
               </Link>
             ))}

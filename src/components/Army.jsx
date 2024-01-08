@@ -7,7 +7,6 @@ export const Army = () => {
 
   useEffect(() => {
     armyService().then((obj) => {
-      // Filter armies with is_owner set to true
       const filteredArmies = obj.filter((army) => army.is_owner === true);
       setUserArmies(filteredArmies);
     });
@@ -36,7 +35,6 @@ export const Army = () => {
                 <h2 className="text-lg font-bold mb-2">{army.name}</h2>
                 <p className="text-gray-700">Points: {army.points}</p>
                 <p className="text-gray-700">Description: {army.description}</p>
-                {/* Add more details based on your army model */}
               </div>
             </div>
           </Link>

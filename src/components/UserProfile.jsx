@@ -7,7 +7,6 @@ export const UserProfile = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // Fetch user data based on the ID from the URL
     userServiceById(id)
       .then((data) => {
         setUserData(data);
@@ -15,7 +14,7 @@ export const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
-  }, [id]); // Fetch data whenever the ID changes
+  }, [id]);
 
   if (!userData) {
     return <div className="text-center mt-8">Loading...</div>;

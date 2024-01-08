@@ -11,7 +11,6 @@ export const CreateGame = () => {
     points: 0,
     max_players: 0,
     system_id: 0,
-    // Add more fields as needed
   });
 
   useEffect(() => {
@@ -44,10 +43,6 @@ export const CreateGame = () => {
       body: JSON.stringify({ ...gameData }),
     });
 
-    // Add your logic to send the gameData to the server for creation
-    // For example, you can use fetch or axios to make a POST request
-
-    // After successful creation, you can navigate to the game details page or any other page
     navigate("/gamesevents");
   };
 
@@ -162,7 +157,6 @@ export const CreateGame = () => {
             })}
           </select>
         </div>
-        {/* Add more input fields for other Game model properties */}
         <button
           type="submit"
           className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"

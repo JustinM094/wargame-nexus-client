@@ -22,15 +22,12 @@ export const ArmyDetails = () => {
         method: "DELETE",
         headers: {
           Authorization: `Token ${token}`,
-          // Add other headers if needed
         },
       });
 
       if (response.ok) {
-        // Redirect to a page after successful deletion, for example, the home page
         navigate("/armies");
       } else {
-        // Handle errors, display a message, etc.
         console.error("Failed to delete army");
       }
     } catch (error) {
@@ -60,7 +57,6 @@ export const ArmyDetails = () => {
             <h3 className="text-xl font-bold">Category:</h3>
             <p>{armyDetails.category?.name}</p>
           </div>
-          {/* Add more details based on your event model */}
           <Link
             to={`/edit-army/${armyDetails.id}`}
             className="mt-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"

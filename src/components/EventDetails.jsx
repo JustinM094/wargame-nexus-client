@@ -38,7 +38,6 @@ export const EventDetails = () => {
     const token = variable.token;
 
     try {
-      // Find the event gamer relationship for the current user
       const foundGamerEvent = currentGamer.gamer_events.find(
         (gamerEvent) => gamerEvent.event.id === eventDetails.id
       );
@@ -47,21 +46,17 @@ export const EventDetails = () => {
         console.warn("Current user is not signed up for this event.");
         return;
       }
-
-      // Make a DELETE request to delete the event gamer relationship
       const deleteResponse = await fetch(
         `http://localhost:8000/eventgamers/${foundGamerEvent.id}`,
         {
           method: "DELETE",
           headers: {
             Authorization: `Token ${token}`,
-            // Add other headers if needed
           },
         }
       );
 
       if (deleteResponse.ok) {
-        // Fetch the updated data after successful deletion
         const [eventObj, gamers] = await Promise.all([
           eventServiceById(id),
           eventGamersService(id),
@@ -70,10 +65,8 @@ export const EventDetails = () => {
         setEventDetails(eventObj);
         setEventGamers(gamers);
 
-        // Redirect to a page after successful deletion
         navigate(`/events/${id}`);
       } else {
-        // Handle errors during deletion
         console.error("Failed to delete event gamer");
       }
     } catch (error) {
@@ -90,15 +83,12 @@ export const EventDetails = () => {
         method: "DELETE",
         headers: {
           Authorization: `Token ${token}`,
-          // Add other headers if needed
         },
       });
 
       if (response.ok) {
-        // Redirect to a page after successful deletion, for example, the home page
         navigate("/gamesevents");
       } else {
-        // Handle errors, display a message, etc.
         console.error("Failed to delete event");
       }
     } catch (error) {
@@ -146,7 +136,6 @@ export const EventDetails = () => {
               ))}
             </ul>
           </div>
-          {/* Add more details based on your event model */}
           <Link
             to={`/event-sign-up/${eventDetails.id}`}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"

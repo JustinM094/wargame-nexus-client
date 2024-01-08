@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 export const AllEvents = () => {
   const [everyEvent, setEveryEvent] = useState([]);
-  //   const navigate = useNavigate();
 
   useEffect(() => {
     eventService().then((eventArray) => {
@@ -42,7 +41,6 @@ export const AllEvents = () => {
                     <h3 className="text-xl font-bold">Time:</h3>
                     <p>{event.event_time}</p>
                   </div>
-                  {/* Add more event details if needed */}
                 </div>
               </Link>
             ))}
