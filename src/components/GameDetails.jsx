@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { gameServiceById } from "../services/gameService";
 
@@ -6,6 +6,7 @@ export const GameDetails = () => {
   const [gameDetails, setGameDetails] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
+  const deleteModal = useRef();
 
   useEffect(() => {
     gameServiceById(id).then((eventObj) => {
@@ -13,7 +14,8 @@ export const GameDetails = () => {
     });
   }, [id]);
 
-  const handleDelete = async () => {
+  const handleDelete = async (event) => {
+    event.preventDefault();
     const variable = JSON.parse(localStorage.getItem("rare_token"));
     const token = variable.token;
 
@@ -33,11 +35,35 @@ export const GameDetails = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    deleteModal.current.showModal();
   };
 
   return (
     <div>
       <article className="bg-white rounded-lg overflow-hidden shadow-md mt-8 mx-auto max-w-2xl">
+        {/* Delete Modal Designated Below*/}
+        <dialog
+          className="__delete-modal__ bg-red-400/90 p-10 font-bold rounded border border-white"
+          ref={deleteModal}
+        >
+          <div>Are you sure you want to delete this tag?</div>
+          <div className="__btn-container__ flex justify-around mt-6">
+            <button
+              className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+              onClick={(event) => {
+                handleDelete(event);
+              }}
+            >
+              Ok
+            </button>
+            <button
+              className="btn-delete"
+              onClick={() => deleteModal.current.close()}
+            >
+              Cancel
+            </button>
+          </div>
+        </dialog>
         <header className="text-3xl font-bold p-4">
           {gameDetails.game_name}
         </header>
@@ -65,19 +91,19 @@ export const GameDetails = () => {
           </div>
           <Link
             to={`/create-event/${id}`}
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
+            className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
           >
-            Host Game?
+            Host Game
           </Link>
           <Link
             to={`/edit-game/${gameDetails.id}`}
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
+            className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
           >
-            Edit Game?
+            Edit Game
           </Link>
           <button
-            onClick={handleDelete}
-            className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+            onClick={(event) => handleDelete(event)}
+            className="bg-orange-800 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
           >
             Delete Game
           </button>

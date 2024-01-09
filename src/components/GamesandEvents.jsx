@@ -22,11 +22,23 @@ export const GamesAndEvents = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-between h-screen p-4 md:p-8 lg:p-12 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-8">Your Games and Events</h1>
+    <div className="flex flex-col items-center justify-between md:p-8">
+      <div className="text-center">
+        <img
+          src="eventsLogo/Your games &.png"
+          alt="Wargame Nexus Logo"
+          className="w-auto h-20"
+        />
+      </div>
       <div className="flex flex-col md:flex-row lg:space-x-8">
         <div className="flex-1 md:order-1">
-          <h2 className="text-2xl font-semibold mb-4">Your Games</h2>
+          <div className="text-center">
+            <img
+              src="eventsLogo/Your Games.png"
+              alt="Wargame Nexus Logo"
+              className="w-auto h-20"
+            />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
             {userGames.map((game) => (
               <Link
@@ -53,13 +65,19 @@ export const GamesAndEvents = () => {
           </div>
           <Link
             to="/creategame"
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mt-8 inline-block"
+            className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300 mt-8 inline-block"
           >
             Create Game
           </Link>
         </div>
         <div className="flex-1 md:order-2">
-          <h2 className="text-2xl font-semibold mb-4">Events</h2>
+          <div className="text-center">
+            <img
+              src="eventsLogo/Your Events.png"
+              alt="Wargame Nexus Logo"
+              className="w-auto h-20"
+            />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
             {userEvents.map((event) => (
               <Link

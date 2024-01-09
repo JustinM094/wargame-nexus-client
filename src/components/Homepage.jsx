@@ -14,16 +14,20 @@ export const HomePage = () => {
 
   return (
     <>
-      <section className="welcome-page">
+      <section>
         <div>
           <img
             src="MainPageImg/Welcome to Wargame Nexus.png"
             alt="Wargame Nexus Logo"
-            className="login-logo-img w-auto h-auto"
+            className="w-full h-auto"
           />
         </div>
-        <div className="recent-recipes text-center mt-8">
-          <h2 className="text-3xl font-bold">Upcoming Events</h2>
+        <div className="text-center mt-8">
+          <img
+            src="eventsLogo/Upcoming (2).png"
+            alt="Wargame Nexus Logo"
+            className="w-auto h-20"
+          />
         </div>
         <div className="container mx-auto mt-8">
           <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

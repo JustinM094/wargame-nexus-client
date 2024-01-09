@@ -15,8 +15,12 @@ export const AllEvents = () => {
   return (
     <>
       <section className="welcome-page">
-        <div className="recent-recipes">
-          <h1>All Upcoming events</h1>
+        <div className="text-center mt-8">
+          <img
+            src="eventsLogo/Upcoming (2).png"
+            alt="Wargame Nexus Logo"
+            className="w-auto h-20"
+          />
         </div>
         <div>
           <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
