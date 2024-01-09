@@ -129,13 +129,13 @@ export const EditProfile = () => {
         <div className="mt-6">
           <button
             type="submit"
-            className="bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600"
+            className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
           >
             Update Profile
           </button>
           <button
             onClick={handleDelete}
-            className="bg-red-500 text-white p-3 rounded-md hover:bg-blue-600"
+            className="bg-orange-800 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
           >
             Delete
           </button>

@@ -59,13 +59,13 @@ export const ArmyDetails = () => {
           </div>
           <Link
             to={`/edit-army/${armyDetails.id}`}
-            className="mt-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+            className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
           >
             Edit
           </Link>
           <button
             onClick={handleDelete}
-            className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+            className="bg-orange-800 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
           >
             Delete Army
           </button>

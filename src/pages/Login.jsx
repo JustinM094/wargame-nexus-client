@@ -45,47 +45,49 @@ export const Login = () => {
         <form className="form--login" onSubmit={handleLogin}>
           <div>
             <img
-              src="logo/WGN.png"
+              src="logo/WGNLogo.png"
               alt="Wargame Nexus Logo"
               className="login-logo-img" // Adjust the width and height as needed
             />
           </div>
           {/* <h1 className="text-4xl mt-7 mb-3">Wargame Nexus</h1> */}
-          <h2 className="text-xl mb-10">Please sign in</h2>
-          {/* Add the video logo */}
+          <div className="mx-auto max-w-md">
+            <h2 className="text-xl mb-10">Please sign in</h2>
+            {/* Add the video logo */}
 
-          <fieldset className="mb-4">
-            <label htmlFor="inputEmail"> Email </label>
-            <input
-              type="text"
-              id="inputEmail"
-              value={email}
-              onChange={(evt) => setEmail(evt.target.value)}
-              className="form-control"
-              placeholder="Email"
-              required
-              autoFocus
-            />
-          </fieldset>
-          <fieldset className="mb-4">
-            <label htmlFor="inputPassword"> Password </label>
-            <input
-              type="password"
-              id="inputPassword"
-              value={password}
-              onChange={(evt) => setPassword(evt.target.value)}
-              className="form-control"
-              placeholder="Password"
-            />
-          </fieldset>
-          <fieldset>
-            <button
-              type="submit"
-              className="button p-3 rounded-md bg-blue-800 text-blue-100"
-            >
-              Sign in
-            </button>
-          </fieldset>
+            <fieldset className="mb-4">
+              <label htmlFor="inputEmail"> Email </label>
+              <input
+                type="text"
+                id="inputEmail"
+                value={email}
+                onChange={(evt) => setEmail(evt.target.value)}
+                className="form-control"
+                placeholder="Email"
+                required
+                autoFocus
+              />
+            </fieldset>
+            <fieldset className="mb-4">
+              <label htmlFor="inputPassword"> Password </label>
+              <input
+                type="password"
+                id="inputPassword"
+                value={password}
+                onChange={(evt) => setPassword(evt.target.value)}
+                className="form-control"
+                placeholder="Password"
+              />
+            </fieldset>
+            <fieldset>
+              <button
+                type="submit"
+                className="bg-orange-800 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
+              >
+                Sign in
+              </button>
+            </fieldset>
+          </div>
         </form>
       </section>
       <div className="loginLinks">

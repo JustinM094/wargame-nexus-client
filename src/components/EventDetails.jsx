@@ -138,28 +138,28 @@ export const EventDetails = () => {
           </div>
           <Link
             to={`/event-sign-up/${eventDetails.id}`}
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
+            className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
           >
             Sign Up
           </Link>
           {isHost && (
             <Link
               to={`/edit-event/${id}`}
-              className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 mb-4"
+              className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
             >
               Edit Event
             </Link>
           )}
           <button
             onClick={handleLeaveEvent}
-            className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+            className="bg-orange-800 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
           >
             Leave Event
           </button>
           {isHost && (
             <button
               onClick={handleDelete}
-              className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+              className="bg-orange-800 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
             >
               Delete Event
             </button>

@@ -13,8 +13,14 @@ export const Army = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-between h-screen">
-      <h1 className="text-3xl font-bold mb-4">Your Armies</h1>
+    <div className="flex flex-col items-center justify-between">
+      <div className="text-center">
+        <img
+          src="logo/Your Armies.png"
+          alt="Wargame Nexus Logo"
+          className="w-auto h-20"
+        />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {userArmies.map((army) => (
           <Link
@@ -43,7 +49,7 @@ export const Army = () => {
 
       <Link
         to="/create-army"
-        className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 mb-4"
+        className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
       >
         Create New
       </Link>

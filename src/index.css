@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  background-color: #cccccc;
+  background-image: url("https://images.ctfassets.net/s5n2t79q9icq/65lkAAGiFRK8TkqYncCYj2/b852e4fbb3ce9b5b3d06a72e614f0a7c/Game_overview_Background_1920x1050.jpg?q=80");
+  background-attachment: fixed;
+  background-size: cover;
+}

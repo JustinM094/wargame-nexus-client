@@ -125,7 +125,7 @@ export const CreateEvent = () => {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          className="bg-sky-700 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition duration-300"
         >
           Host Event
         </button>
